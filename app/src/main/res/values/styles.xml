@@ -1,0 +1,63 @@
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base" />
+    <!--<style name="AppThemeIntro" parent="AppThemeIntro.Base" />-->
+
+    <style name="dialogButtonTheme" parent="AppTheme">
+        <item name="colorButtonNormal">@color/grey</item>
+    </style>
+
+    <style name="whiteButtonTheme" parent="AppTheme">
+        <item name="colorButtonNormal">@color/white</item>
+    </style>
+    <style name="greenButtonTheme" parent="AppTheme">
+        <item name="colorButtonNormal">#009688</item>
+    </style>
+    <style name="lightBlueButtonTheme" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">#2CA5E0</item>
+    </style>
+    <style name="blueButtonTheme" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">#2B84D2</item>
+    </style>
+
+    <style name="CircularProgress" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#4caf50</item>
+    </style>
+
+    <!--remove 16dp padding left-->
+    <style name="Widget.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button"> <item name="colorButtonNormal">@color/colorPrimaryDark</item> </style>
+
+    <style name="AppThemeNoActionBar" parent="AppTheme.Base">
+        <item name="colorPrimaryDark">#BF360C</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+
+    </style>
+
+    <style name="fullscreen_dialog" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+
+    <style name="CustomCirclePageIndicator">
+        <item name="strokeWidth">0dp</item>
+        <item name="radius">4dp</item>
+        <item name="centered">true</item>
+        <item name="pageColor">#d4d4d4</item>
+        <item name="fillColor">@color/colorPrimary</item>
+
+    </style>
+
+    <style name="myDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+</resources>

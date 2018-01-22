@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><!-- needs this container to work with the Tablayout -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@android:id/icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:paddingBottom="0dp"
+        android:scaleType="centerInside"
+        android:tint="@color/white"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="14sp"
+        tools:text="User Profile"
+        android:layout_centerHorizontal="true"
+        fontPath="fonts/iran_sans.ttf"
+        />
+
+</RelativeLayout>

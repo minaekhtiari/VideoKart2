@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:id="@+id/layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/lbl_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="سایر"
+                fontPath="fonts/iran_sans.ttf"
+                android:textColor="#212121"
+                android:textSize="@dimen/text_size_title_toolbar_medium"
+                android:gravity="center"/>
+
+        </RelativeLayout>
+
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:id="@+id/btn_change_theme"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_drawer_item_primary"
+            android:paddingLeft="@dimen/material_drawer_vertical_padding"
+            android:paddingRight="8dp"
+            >
+
+            <ImageView
+                android:id="@+id/material_drawer_icon2"
+                android:layout_width="@dimen/material_drawer_item_primary"
+                android:layout_height="@dimen/material_drawer_item_primary"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:paddingBottom="11dp"
+                android:paddingTop="11dp"
+                android:src="@mipmap/ic_color_lens_black_24dp"
+                android:tint="#424242" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/material_drawer_badge_container"
+                android:layout_toLeftOf="@+id/material_drawer_icon2"
+                android:layout_toRightOf="@+id/material_drawer_badge_container"
+                android:layout_toStartOf="@+id/material_drawer_icon2"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    fontPath="fonts/iran_sans.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:gravity="center_vertical|right"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="تنظیم رنگ نرم افزار"
+                    android:textColor="#222"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_support"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_drawer_item_primary"
+            android:paddingLeft="@dimen/material_drawer_vertical_padding"
+            android:paddingRight="8dp"
+            >
+
+            <ImageView
+                android:id="@+id/material_drawer_icon"
+                android:layout_width="@dimen/material_drawer_item_primary"
+                android:layout_height="@dimen/material_drawer_item_primary"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:paddingBottom="11dp"
+                android:paddingTop="11dp"
+                android:src="@mipmap/ic_email_black_24dp"
+                android:tint="#424242" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/material_drawer_badge_container"
+                android:layout_toLeftOf="@+id/material_drawer_icon"
+                android:layout_toRightOf="@+id/material_drawer_badge_container"
+                android:layout_toStartOf="@+id/material_drawer_icon"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    fontPath="fonts/iran_sans.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:gravity="center_vertical|right"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="پشتیبانی"
+                    android:textColor="#222"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_raw"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_drawer_item_primary"
+            android:paddingLeft="@dimen/material_drawer_vertical_padding"
+            android:paddingRight="8dp">
+
+            <ImageView
+                android:id="@+id/material_drawer_icon1"
+                android:layout_width="@dimen/material_drawer_item_primary"
+                android:layout_height="@dimen/material_drawer_item_primary"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:paddingBottom="11dp"
+                android:paddingTop="11dp"
+                android:src="@mipmap/ic_gavel_black_24dp"
+                android:tint="#424242" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/material_drawer_icon1"
+                android:layout_toStartOf="@+id/material_drawer_icon1"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    fontPath="fonts/iran_sans.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:gravity="center_vertical|right"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="قوانین"
+                    android:textColor="#222"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            ></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_about"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_drawer_item_primary"
+            android:paddingLeft="@dimen/material_drawer_vertical_padding"
+            android:paddingRight="8dp">
+
+            <ImageView
+                android:id="@+id/material_drawer_icon4"
+                android:layout_width="@dimen/material_drawer_item_primary"
+                android:layout_height="@dimen/material_drawer_item_primary"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:paddingBottom="11dp"
+                android:paddingTop="11dp"
+                android:src="@mipmap/ic_info_white_24dp"
+                android:tint="#424242" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/material_drawer_icon4"
+                android:layout_toStartOf="@+id/material_drawer_icon4"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    fontPath="fonts/iran_sans.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:gravity="center_vertical|right"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="درباره ما"
+                    android:textColor="#222"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_unsubscribe"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_drawer_item_primary"
+            android:paddingLeft="@dimen/material_drawer_vertical_padding"
+            android:paddingRight="8dp">
+
+            <ImageView
+                android:id="@+id/material_drawer_icon6"
+                android:layout_width="@dimen/material_drawer_item_primary"
+                android:layout_height="@dimen/material_drawer_item_primary"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:paddingBottom="11dp"
+                android:paddingTop="11dp"
+                android:src="@mipmap/ic_person_black_24dp"
+                android:tint="#424242" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/material_drawer_icon6"
+                android:layout_toStartOf="@+id/material_drawer_icon6"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    fontPath="fonts/iran_sans.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:gravity="center_vertical|right"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="لغو عضویت"
+                    android:textColor="#222"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/grey"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_exit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_drawer_item_primary"
+            android:paddingLeft="@dimen/material_drawer_vertical_padding"
+            android:paddingRight="8dp">
+
+            <ImageView
+                android:id="@+id/material_drawer_icon5"
+                android:layout_width="@dimen/material_drawer_item_primary"
+                android:layout_height="@dimen/material_drawer_item_primary"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="11dp"
+                android:paddingTop="11dp"
+                android:layout_marginLeft="8dp"
+                android:src="@mipmap/ic_exit_to_app_white_24dp"
+                android:tint="#424242" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/material_drawer_icon5"
+                android:layout_toStartOf="@+id/material_drawer_icon5"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/textView"
+                    fontPath="fonts/iran_sans.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:gravity="center_vertical|right"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="خروج"
+                    android:textColor="#222"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

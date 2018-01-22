@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?attr/actionBarSize">
+
+    <TextView
+        android:id="@+id/lbl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center|bottom|left|top"
+        android:text="Fury Movie"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#fff"
+        android:textSize="14dp"
+        android:visibility="invisible" />
+
+
+    <TextView
+        android:id="@+id/lbl_title_time"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/lbl_title"
+        android:layout_alignTop="@+id/lbl_title"
+        android:layout_toEndOf="@+id/textView4"
+        android:layout_toRightOf="@+id/textView4"
+        android:gravity="center|bottom|left|top"
+        android:paddingTop="1.5dp"
+        android:text="00:00"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#fff"
+        android:textSize="13dp"
+        android:visibility="invisible" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/lbl_title_time"
+        android:layout_alignTop="@+id/lbl_title"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_toEndOf="@+id/lbl_title"
+        android:layout_toRightOf="@+id/lbl_title"
+        android:gravity="center|bottom|top"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#fff"
+        android:textSize="14dp" />
+
+    <TextView
+
+        android:id="@+id/lbl_title_movie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lbl_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/lbl_title"
+        android:layout_marginTop="26dp"
+        android:text="Inception"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#fff"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        style="?android:attr/actionButtonStyle"
+        android:layout_width="48dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="false"
+        android:padding="@dimen/margin_8"
+        android:src="@mipmap/ic_arrow_back_white_24dp"
+        android:tint="@color/white" />
+
+</RelativeLayout>

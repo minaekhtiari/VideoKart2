@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?attr/actionBarSize"
+    >
+
+    <TextView
+        android:id="@+id/lbl_title"
+        fontPath="fonts/iran_sans.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/title"
+        android:textSize="@dimen/text_size_title_toolbar_medium" />
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        style="?android:attr/actionButtonStyle"
+        android:layout_width="48dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="false"
+        android:padding="@dimen/margin_8"
+        android:src="@mipmap/ic_arrow_back_white_24dp"
+        android:tint="@color/title" />
+
+    <TextView
+        android:id="@+id/lbl_profile_exit"
+        fontPath="fonts/iran_sans.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:text="خروج"
+        android:visibility="gone"
+        android:textColor="@color/title" />
+</RelativeLayout>

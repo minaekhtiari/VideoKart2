@@ -1,0 +1,97 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="actionbar_button_width">48dp</dimen>
+    <dimen name="actionbar_button_height">48dp</dimen>
+
+    <dimen name="action_button_height">54dp</dimen>
+
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+
+    <dimen name="margin_3">3dp</dimen>
+    <dimen name="padding_3">3dp</dimen>
+
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
+
+    <!-- shadow-->
+    <dimen name="layout_shadow">2dp</dimen>
+    <dimen name="appbar_shadow">4dp</dimen>
+
+
+    <!-- font sizes -->
+
+    <dimen name="subscribe_list_item_header">14sp</dimen>
+    <dimen name="subscribe_list_item_lable">13sp</dimen>
+
+    <dimen name="post_list_item_header">14sp</dimen>
+    <dimen name="post_list_item_desc">12sp</dimen>
+    <dimen name="post_list_item_price">13sp</dimen>
+    <dimen name="post_list_item_time">10sp</dimen>
+
+    <dimen name="post_list_item_header_tablet">16sp</dimen>
+    <dimen name="post_list_item_desc_tablet">14sp</dimen>
+    <dimen name="post_list_item_price_tablet">15sp</dimen>
+    <dimen name="post_list_item_time_tablet">12sp</dimen>
+
+    <dimen name="post_detail_title">16sp</dimen>
+    <dimen name="post_detail_time">13sp</dimen>
+    <dimen name="post_detail_price">15sp</dimen>
+    <dimen name="post_detail_label">14sp</dimen>
+    <dimen name="post_detail_label2">13sp</dimen>
+    <dimen name="post_detail_sub_header">12sp</dimen>
+
+
+    <dimen name="action_button_1">14sp</dimen>
+    <dimen name="action_button_2">12sp</dimen>
+
+    <dimen name="filter_label">12sp</dimen>
+    <dimen name="filter_value">11sp</dimen>
+
+    <dimen name="widget_label">13sp</dimen>
+
+    <dimen name="text_size_title_toolbar_small">14dp</dimen>
+    <dimen name="text_size_subtitle_toolbar_small">13sp</dimen>
+    <dimen name="text_size_title_toolbar_medium">19dp</dimen>
+    <dimen name="text_size_title_toolbar_Large">21dp</dimen>
+
+    <dimen name="dialog_list_header">16sp</dimen>
+    <dimen name="dialog_list_items">13sp</dimen>
+    <dimen name="dialog_label_1">13sp</dimen>
+    <dimen name="dialog_label_2">10sp</dimen>
+    <dimen name="dialog_edit_text">14sp</dimen>
+
+    <dimen name="edit_text_size_normal">15sp</dimen>
+
+    <dimen name="drawer_primary_size">14sp</dimen>
+    <dimen name="drawer_secondary_size">12sp</dimen>
+
+    <dimen name="text_size_title_medium">14sp</dimen>
+
+    <dimen name="font_icon_size">45sp</dimen>
+
+    <dimen name="text_size_label_large">21sp</dimen>
+    <dimen name="text_size_label_medium">15sp</dimen>
+
+    <dimen name="text_size_subtitle_large">19sp</dimen>
+    <dimen name="text_size_subtitle_medium">15sp</dimen>
+    <dimen name="text_size_subtitle_small">11sp</dimen>
+    <dimen name="text_size_body_large">21sp</dimen>
+    <dimen name="text_size_body_medium">17sp</dimen>
+    <dimen name="text_size_body_small">14sp</dimen>
+    <dimen name="text_size_tip">10sp</dimen>
+
+
+
+
+
+</resources>
