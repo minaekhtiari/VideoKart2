@@ -83,14 +83,14 @@ public class VideoCardApi {
     }
 
     public void hello(AsyncHttpResponseHandler callback) {
-        execute("get", "hello", callback, "uuid", AndroidUtils.getDeviceID(), "device_name", AndroidUtils.getDeviceName(), "os_version", AndroidUtils.getAndroidVersion(), "app_version", AndroidUtils.getAppVersionCode());
+        execute("post", "hello", callback, "uuid", AndroidUtils.getDeviceID(), "device_name", AndroidUtils.getDeviceName(), "os_version", AndroidUtils.getAndroidVersion(), "app_version", AndroidUtils.getAppVersionCode());
     }
 
     public void getMovies(Integer type,Integer start,Integer limit,AsyncHttpResponseHandler callback) {
         execute("post", "movie/list", callback,"type",type,"start",start,"limit",limit);
     }
     public void getBook(AsyncHttpResponseHandler callback) {
-        execute("post", "book/list", callback);
+        execute("get", "book/list", callback);
     }
     public void getLesson(Integer bookId, AsyncHttpResponseHandler callback) {
         execute("post", "book/lesson/list", callback,"book_id",bookId);
@@ -147,17 +147,15 @@ public class VideoCardApi {
         execute("post", "book/word/search_simple", callback,"query",query);
     }
 
-    public void sendVerificationSMS(String number, AsyncHttpResponseHandler callback) {
-        execute("post", "verification/send", callback, "mobile_number",number);
-    }
-
-    public void checkVerification(String number, String vertificationCode, AsyncHttpResponseHandler callback) {
-        execute("post", "verification/check", callback, "mobile_number",number,"code",vertificationCode);
-    }
-
     public void userFavoriteClips( AsyncHttpResponseHandler callback) {
         execute("post", "clip/list/liked", callback);
     }
+
+
+
+
+
+
 
 
 

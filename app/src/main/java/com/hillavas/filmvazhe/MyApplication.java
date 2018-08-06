@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 
 import com.crashlytics.android.Crashlytics;
+import com.hillavas.filmvazhe.api.HamrahApi;
 import com.hillavas.filmvazhe.api.IrancellApi;
 import com.hillavas.filmvazhe.api.VideoCardApi;
 
@@ -24,6 +25,8 @@ public class MyApplication extends Application {
 
     public static VideoCardApi apiVideokart;
     public static IrancellApi irancellApi;
+    public static HamrahApi hamrahApi;
+
 
 
     private static SharedPreferences sharedPreferences;
@@ -53,6 +56,7 @@ public class MyApplication extends Application {
 
         apiVideokart = new VideoCardApi();
         irancellApi = new IrancellApi();
+        hamrahApi=new HamrahApi();
 
 
         CharkhoneSdkApp.initSdk(this, getSecrets(), false);

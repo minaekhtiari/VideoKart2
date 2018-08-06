@@ -279,6 +279,7 @@
                 android:elevation="3dp"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="3dp"
+                android:visibility="invisible"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true"
                 card_view:cardCornerRadius="5dp"

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,13 +21,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.hillavas.filmvazhe.screen.core.BaseActivity;
 import com.hillavas.filmvazhe.MyApplication;
 import com.hillavas.filmvazhe.R;
 import com.hillavas.filmvazhe.model.Transaction;
+import com.hillavas.filmvazhe.utils.AndroidUtils;
+import com.hillavas.filmvazhe.utils.ToastHandler;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.listeners.ActionClickListener;
 
 import java.util.ArrayList;
 
@@ -56,14 +62,12 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     Button btnEdit;
     @BindView(R.id.txt_name)
     EditText txtName;
-    @BindView(R.id.transaction_progress)
-    ProgressBar transactionProgress;
+
 
     String shortCode = null;
     String activationCode = null;
 
     String phoneNumber;
-    private ArrayList<Transaction> transactionList = new ArrayList<>();
     private static final int PERMISSION_SEND_SMS = 123;
 
 
@@ -83,9 +87,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         custom_action_bar.findViewById(R.id.btn_back).setOnClickListener(this);
         custom_action_bar.findViewById(R.id.lbl_profile_exit).setOnClickListener(this);
 
-        toolbar.setBackgroundColor(Color.parseColor(MyApplication.getSharedPreferences().getString("colorMain","#fafafa")));
-        ((ImageButton) custom_action_bar.findViewById(R.id.btn_back)).setColorFilter(Color.parseColor(MyApplication.getSharedPreferences().getString("colorSecond","#212121")));
-        ((TextView) custom_action_bar.findViewById(R.id.lbl_title)).setTextColor(Color.parseColor(MyApplication.getSharedPreferences().getString("colorSecond","#212121")));
+        toolbar.setBackgroundColor(Color.parseColor(MyApplication.getSharedPreferences().getString("colorMain", "#fafafa")));
+        ((ImageButton) custom_action_bar.findViewById(R.id.btn_back)).setColorFilter(Color.parseColor(MyApplication.getSharedPreferences().getString("colorSecond", "#212121")));
+        ((TextView) custom_action_bar.findViewById(R.id.lbl_title)).setTextColor(Color.parseColor(MyApplication.getSharedPreferences().getString("colorSecond", "#212121")));
 
         getSupportActionBar().setCustomView(custom_action_bar);
 
@@ -104,6 +108,81 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
     void getBasicInfo() {
 
+        MyApplication.apiVideokart.hello(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                //Log.v("result", content);
+
+
+                JsonObject result = new JsonParser().parse(new String(responseBody)).getAsJsonObject();
+                JsonObject status = result.getAsJsonObject("status");
+
+                if (status.get("code").getAsInt() == 200) {
+
+                    JsonObject data = result.get("data").getAsJsonObject();
+
+                    try {
+                        if (data.get("user").isJsonNull()) {
+
+
+                        } else {
+
+                            if (!data.get("user").getAsJsonObject().get("full_name").isJsonNull())
+                                txtName.setText(data.get("user").getAsJsonObject().get("full_name").getAsString());
+
+
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                } else {
+                    SnackbarManager.show(
+                            Snackbar.with(getContext()) // context
+                                    .textTypeface(MyApplication.getTypeFace())
+                                    .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
+                                    .swipeToDismiss(false)
+                                    .actionLabel("تلاش مجدد")
+                                    .text(status.get("message").getAsString()) // text to display
+                                    .actionListener(new ActionClickListener() {
+                                        @Override
+                                        public void onActionClicked(Snackbar snackbar) {
+
+                                            getBasicInfo();
+
+                                        }
+                                    })
+                            , ProfileActivity.this); // activity where it is dis
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+
+                SnackbarManager.show(
+                        Snackbar.with(getContext()) // context
+                                .textTypeface(MyApplication.getTypeFace())
+                                .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
+                                .swipeToDismiss(false)
+                                .actionLabel("تلاش مجدد")
+                                .text("خطا در برقراری ارتباط") // text to display
+                                .actionListener(new ActionClickListener() {
+                                    @Override
+                                    public void onActionClicked(Snackbar snackbar) {
+
+
+                                        getBasicInfo();
+
+                                    }
+                                })
+                        , ProfileActivity.this); // activity where it is dis
+
+            }
+        });
 
 
     }
@@ -183,8 +262,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
             case R.id.btn_off_service:
                 btnOffService.setEnabled(false);
-
-
 
 
                 break;

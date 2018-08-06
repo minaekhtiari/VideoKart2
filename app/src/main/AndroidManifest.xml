@@ -12,7 +12,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="${appIcon}"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme"
@@ -74,6 +74,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".screen.BookWordDialougeListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".screen.UnsubscribeActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

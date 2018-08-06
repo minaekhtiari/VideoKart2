@@ -38,7 +38,7 @@
         android:layout_alignRight="@+id/layout_feedback"
         android:gravity="right"
         android:padding="10dp"
-        android:text="برای کارهای خیلی ضروری می تونی با شماره تلفن 96998998 داخلی 310 تماس بگیری."
+        android:text="برای کارهای خیلی ضروری می تونی با شماره تلفن 96669152 تماس بگیری."
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_label_medium" />

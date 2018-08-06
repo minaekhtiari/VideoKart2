@@ -6,9 +6,13 @@ import android.provider.Settings;
 import com.hillavas.filmvazhe.MyApplication;
 
 /**
- * Created by ArashJahani on 15/06/2015.
+ * Created by ArashJahani
  */
 public class AndroidUtils {
+
+
+
+
     public static Integer getAppVersionCode() {
         try {
             Integer versionCode = MyApplication.getContext().getPackageManager().getPackageInfo(MyApplication.getContext().getPackageName(), 0).versionCode;

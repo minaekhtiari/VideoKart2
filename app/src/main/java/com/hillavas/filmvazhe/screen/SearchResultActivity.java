@@ -122,39 +122,12 @@ public class SearchResultActivity extends BaseActivity implements View.OnClickLi
                             JsonArray array = result.getAsJsonArray("data");
                             if (array.size() > 0) {
 
-                                if (item.getLesson().getStatus() == LessonStatus.Free) {
 
                                     Intent intent = new Intent(SearchResultActivity.this, BookWordDialougeListActivity.class);
                                     intent.putExtra("word", item);
                                     intent.putExtra("searchResult", new String(responseBody));
                                     startActivity(intent);
-                                } else {
 
-                                    new MaterialDialog.Builder(SearchResultActivity.this)
-                                            .typeface(MyApplication.getTypeFace(),MyApplication.getTypeFace())
-                                            .title("بسته ویژه")
-                                            .contentGravity(GravityEnum.END)
-                                            .titleGravity(GravityEnum.END)
-                                            .contentColor(getResources().getColor(R.color.md_grey_700))
-                                            .positiveColor(getResources().getColor(R.color.md_blue_700))
-                                            .negativeColor(getResources().getColor(R.color.md_green_700))
-
-                                            .content("جهت دسترسی به این کلمه نیاز است بسته ویژه را فعال سازی نمائید.")
-                                            .positiveText("فعال سازی")
-                                            .negativeText("بعدا")
-                                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                                @Override
-                                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                                    Uri uri = Uri.parse("smsto:307566");
-                                                    Intent it = new Intent(Intent.ACTION_SENDTO, uri);
-                                                    it.putExtra("sms_body", "1");
-                                                    startActivity(it);
-
-                                                    dialog.dismiss();
-                                                }
-                                            })
-                                            .show();
-                                }
 
                             } else {
                                 SnackbarManager.show(

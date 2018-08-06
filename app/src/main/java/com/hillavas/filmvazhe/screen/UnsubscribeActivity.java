@@ -14,6 +14,7 @@ import com.android.billingclient.util.IabHelper;
 import com.android.billingclient.util.IabResult;
 import com.android.billingclient.util.Inventory;
 import com.android.billingclient.util.Purchase;
+import com.hillavas.filmvazhe.MyApplication;
 import com.hillavas.filmvazhe.R;
 
 import net.jhoobin.jhub.CharkhoneSdkApp;
@@ -30,7 +31,7 @@ public class UnsubscribeActivity extends Activity implements View.OnClickListene
     // Does the user have the premium upgrade?
     private boolean mIsPremium = false;
     // SKUs for our products: the premium upgrade (non-consumable) and gas (consumable)
-    private static final String SKU_PREMIUM = "AlefchinPremium";
+    private static final String SKU_PREMIUM = "FilmVazhePremium";
     // (arbitrary) request code for the purchase flow
     private static final int RC_REQUEST = 10001;
     // The helper object
@@ -127,7 +128,11 @@ public class UnsubscribeActivity extends Activity implements View.OnClickListene
             }
             Log.d(TAG, "End cancellation flow.");
 
-            startActivity(new Intent(UnsubscribeActivity.this, FilmVazehSignActivity.class));
+            MyApplication.getSharedPreferences().edit().clear().apply();
+
+            Intent intent = new Intent(UnsubscribeActivity.this, GuideActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             finish();
         }
     };

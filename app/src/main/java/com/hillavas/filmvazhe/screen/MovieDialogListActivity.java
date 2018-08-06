@@ -88,9 +88,9 @@ public class MovieDialogListActivity extends BaseActivity implements View.OnClic
 
         lblTitle.setText(movie.getName() + " Movie");
 
-        toolbar.setBackgroundColor(Color.parseColor(MyApplication.getSharedPreferences().getString("colorMain","#fafafa")));
-        ((ImageButton) custom_action_bar.findViewById(R.id.btn_back)).setColorFilter(Color.parseColor(MyApplication.getSharedPreferences().getString("colorSecond","#212121")));
-        ((TextView) custom_action_bar.findViewById(R.id.lbl_title)).setTextColor(Color.parseColor(MyApplication.getSharedPreferences().getString("colorSecond","#212121")));
+        toolbar.setBackgroundColor(Color.parseColor(MyApplication.getSharedPreferences().getString("colorMain", "#fafafa")));
+        ((ImageButton) custom_action_bar.findViewById(R.id.btn_back)).setColorFilter(Color.parseColor(MyApplication.getSharedPreferences().getString("colorSecond", "#212121")));
+        ((TextView) custom_action_bar.findViewById(R.id.lbl_title)).setTextColor(Color.parseColor(MyApplication.getSharedPreferences().getString("colorSecond", "#212121")));
 
         LinearLayoutManager llm = new LinearLayoutManager(MyApplication.getContext());
         listCard.setLayoutManager(llm);
@@ -135,38 +135,11 @@ public class MovieDialogListActivity extends BaseActivity implements View.OnClic
                         public void onItemClick(Clip item) {
 
 
-                            if (item.getWord().getLesson().getStatus() == LessonStatus.Free) {
+                            Intent in = new Intent(MovieDialogListActivity.this, DialogueDetailActivity.class);
+                            in.putExtra("clip", (Serializable) item);
 
-                                Intent in = new Intent(MovieDialogListActivity.this, DialogueDetailActivity.class);
-                                in.putExtra("clip", (Serializable) item);
+                            startActivity(in);
 
-                                startActivity(in);
-                            } else {
-                                new MaterialDialog.Builder(MovieDialogListActivity.this)
-                                        .typeface(MyApplication.getTypeFace(),MyApplication.getTypeFace())
-                                        .title("بسته ویژه")
-                                        .contentGravity(GravityEnum.END)
-                                        .titleGravity(GravityEnum.END)
-                                        .contentColor(getResources().getColor(R.color.md_grey_700))
-                                        .positiveColor(getResources().getColor(R.color.md_blue_700))
-                                        .negativeColor(getResources().getColor(R.color.md_green_700))
-
-                                        .content("جهت دسترسی به این کلمه نیاز است بسته ویژه را فعال سازی نمائید.")
-                                        .positiveText("فعال سازی")
-                                        .negativeText("بعدا")
-                                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                            @Override
-                                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                                Uri uri = Uri.parse("smsto:307566");
-                                                Intent it = new Intent(Intent.ACTION_SENDTO, uri);
-                                                it.putExtra("sms_body", "1");
-                                                startActivity(it);
-
-                                                dialog.dismiss();
-                                            }
-                                        })
-                                        .show();
-                            }
 
                         }
                     });

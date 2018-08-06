@@ -96,48 +96,24 @@ public class FilmVazehSignActivity extends BaseActivity implements View.OnClickL
 
         btnSignUp.setOnClickListener(this);
 
-//        String base64EncodedPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIHg4cW9avnZYkKOet/k/TSsXngpWXtVpuwvxXhfn3HdrWV47LA28aBrODL1n9+corT+F5nIVa5pd3p2xR99ob8rv3pssYkkBU9Z21d+JVx4tLxTXetazZCaL8Uux3sJTHNHC6Yuab/SXtZLK/2ArYRKbmbaNBo8CJgHXTNMRSBwIDAQAB";
-//
-//        // Create the helper, passing it our context and the public key to verify signatures with
-//        Log.d(TAG, "Creating IAB helper.");
-//        mHelper = new IabHelper(this, base64EncodedPublicKey);
-//
-//        // enable debug logging (for a production application, you should set this to false).
-//        mHelper.enableDebugLogging(false);
-//
-//        // Start setup. This is asynchronous and the specified listener
-//        // will be called once setup completes.
-//        Log.d(TAG, "Starting setup.");
-//        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-//            public void onIabSetupFinished(IabResult result) {
-//                Log.d(TAG, "Setup finished.");
-//
-//                if (!result.isSuccess()) {
-//                    // Oh noes, there was a problem.
-//                    complain("Problem setting up in-app billing: " + result);
-//                    return;
-//                }
-//
-//                // Have we been disposed of in the meantime? If so, quit.
-//                if (mHelper == null) return;
-//
-////                // IAB is fully set up. Now, let's get an inventory of stuff we own.
-//                Log.d(TAG, "Setup successful. Querying inventory.");
-//                try {
-//                    mHelper.queryInventoryAsync(mGotInventoryListener);
-//                } catch (IabHelper.IabAsyncInProgressException e) {
-//
-//                    complain("Error querying inventory. Another async operation in progress.");
-//                }
-//            }
-//        });
+        String base64EncodedPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIHg4cW9avnZYkKOet/k/TSsXngpWXtVpuwvxXhfn3HdrWV47LA28aBrODL1n9+corT+F5nIVa5pd3p2xR99ob8rv3pssYkkBU9Z21d+JVx4tLxTXetazZCaL8Uux3sJTHNHC6Yuab/SXtZLK/2ArYRKbmbaNBo8CJgHXTNMRSBwIDAQAB";
+
+        // Create the helper, passing it our context and the public key to verify signatures with
+        Log.d(TAG, "Creating IAB helper.");
+        mHelper = new IabHelper(this, base64EncodedPublicKey);
+
+        // enable debug logging (for a production application, you should set this to false).
+        mHelper.enableDebugLogging(false);
+
+        // Start setup. This is asynchronous and the specified listener
+        // will be called once setup completes.
+
+        Log.d(TAG, "Starting setup.");
 
         loginAnonymous();
     }
 
     void loginAnonymous() {
-
-        layoutSignUp.setVisibility(View.INVISIBLE);
 
 
         MyApplication.apiVideokart.hello(new AsyncHttpResponseHandler() {
@@ -165,13 +141,37 @@ public class FilmVazehSignActivity extends BaseActivity implements View.OnClickL
                             "apiToken", data.get("device").getAsJsonObject().get("api_token").getAsString());
 
 
-                    String number = MyApplication.getSharedPreferences().getString("phoneNumber", null);
-                    if (number != null) {
-                        txtPhone.setText(number);
-                        checkAccount(number);
+                    mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                        public void onIabSetupFinished(IabResult result) {
+                            Log.d(TAG, "Setup finished.");
 
+                            if (!result.isSuccess()) {
+                                // Oh noes, there was a problem.
+                                complain("Problem setting up in-app billing: " + result);
+                                return;
+                            }
 
-                    }
+                            // Have we been disposed of in the meantime? If so, quit.
+                            if (mHelper == null) return;
+
+//                // IAB is fully set up. Now, let's get an inventory of stuff we own.
+                            Log.d(TAG, "Setup successful. Querying inventory.");
+                            try {
+                                mHelper.queryInventoryAsync(mGotInventoryListener);
+                            } catch (IabHelper.IabAsyncInProgressException e) {
+
+                                complain("Error querying inventory. Another async operation in progress.");
+                            }
+                        }
+                    });
+
+//                    String number = MyApplication.getSharedPreferences().getString("phoneNumber", null);
+//                    if (number != null) {
+//                        txtPhone.setText(number);
+//                        checkAccount(number);
+//
+//
+//                    }
 
 
                 } else {
@@ -223,8 +223,6 @@ public class FilmVazehSignActivity extends BaseActivity implements View.OnClickL
             public void onFinish() {
                 super.onFinish();
 
-                layoutSignUp.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
 
             }
         });
@@ -249,9 +247,9 @@ public class FilmVazehSignActivity extends BaseActivity implements View.OnClickL
                     return;
                 }
 
-                //localStorage.saveLocalData("phoneNumber", phoneNumber);
-
-                //checkAccount(phoneNumber);
+//                MyApplication.saveLocalData("phoneNumber", phoneNumber);
+//
+//                checkAccount(phoneNumber);
 
                 fillInIntent.putExtra("msisdn", phoneNumber);
                 mHelper.setFillInIntent(fillInIntent);
@@ -328,7 +326,7 @@ public class FilmVazehSignActivity extends BaseActivity implements View.OnClickL
 
         AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(FilmVazehSignActivity.this, R.style.myDialog));
         builder1.setMessage(
-                "جهت عضویت در الفچین عدد ۱ را به ۷۳۸۷۸۷ ارسال کنید."
+                "جهت عضویت در الفچین عدد ۱ را به ۷۳۸۷۵۲ ارسال کنید."
         );
         builder1.setTitle("اشتراک");
         //builder1.setCancelable(false);
@@ -338,7 +336,7 @@ public class FilmVazehSignActivity extends BaseActivity implements View.OnClickL
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Uri sms_uri = Uri.parse("smsto:738737");
+                        Uri sms_uri = Uri.parse("smsto:738752");
                         Intent sms_intent = new Intent(Intent.ACTION_SENDTO, sms_uri);
                         sms_intent.putExtra("sms_body", "1");
                         startActivity(sms_intent);
@@ -392,7 +390,7 @@ public class FilmVazehSignActivity extends BaseActivity implements View.OnClickL
                 } else {
 
                     startActivity(new Intent(FilmVazehSignActivity.this, HomeActivity.class));
-
+finish();
                 }
             } else {
                 layoutSignUp.setVisibility(View.VISIBLE);
@@ -492,7 +490,7 @@ public class FilmVazehSignActivity extends BaseActivity implements View.OnClickL
                         MyApplication.saveLocalData("disabelCharging", true);
                     }
                 } else {
-                    Toast.makeText(FilmVazehSignActivity.this, result.get("Message").getAsString(), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(FilmVazehSignActivity.this, result.get("Message").getAsString(), Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -24,6 +24,7 @@ import com.android.billingclient.util.Purchase;
 import com.hillavas.filmvazhe.screen.FeedbackActivity;
 import com.hillavas.filmvazhe.screen.FilmVazehSignActivity;
 import com.hillavas.filmvazhe.screen.UnsubscribeActivity;
+import com.hillavas.filmvazhe.screen.VideoKartSignActivity;
 import com.hillavas.filmvazhe.screen.WebActivity;
 import com.hillavas.filmvazhe.MyApplication;
 import com.hillavas.filmvazhe.R;
@@ -66,6 +67,9 @@ public class OthersFragment extends Fragment implements View.OnClickListener {
         ((RelativeLayout) v.findViewById(R.id.btn_unsubscribe)).setOnClickListener(this);
         ((RelativeLayout) v.findViewById(R.id.btn_change_theme)).setOnClickListener(this);
 
+        if (getActivity().getPackageName().equals("com.hillavas.videokart")) {
+            ((RelativeLayout) v.findViewById(R.id.btn_unsubscribe)).setVisibility(View.GONE);
+        }
 
         return v;
 
@@ -81,7 +85,7 @@ public class OthersFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_unsubscribe:
 
                 startActivity(new Intent(getActivity(), UnsubscribeActivity.class));
-
+                getActivity().finish();
                 break;
             case R.id.btn_change_theme:
 
@@ -209,9 +213,10 @@ public class OthersFragment extends Fragment implements View.OnClickListener {
                                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
                                                     dialog.dismiss();
-                                                    Intent intent1 = new Intent(getActivity(), FilmVazehSignActivity.class);
-                                                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    Intent intent1 = new Intent(getActivity(), VideoKartSignActivity.class);
+                                                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                     getActivity().startActivity(intent1);
+                                                    getActivity().finish();
 
                                                 }
                                             })

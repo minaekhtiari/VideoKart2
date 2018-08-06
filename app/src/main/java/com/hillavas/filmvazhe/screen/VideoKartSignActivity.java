@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -15,11 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.billingclient.util.IabBroadcastReceiver;
-import com.android.billingclient.util.IabHelper;
-import com.android.billingclient.util.IabResult;
-import com.android.billingclient.util.Inventory;
-import com.android.billingclient.util.Purchase;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.hillavas.filmvazhe.MyApplication;
@@ -33,8 +28,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.listeners.ActionClickListener;
-import com.raycoarana.codeinputview.CodeInputView;
-import com.raycoarana.codeinputview.OnCodeCompleteListener;
 
 import java.util.Random;
 
@@ -44,6 +37,7 @@ import cz.msebera.android.httpclient.Header;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 import static com.hillavas.filmvazhe.MyApplication.getContext;
+import static com.hillavas.filmvazhe.MyApplication.hamrahApi;
 
 //
 //import com.android.billingclient.util.IabBroadcastReceiver;
@@ -52,7 +46,7 @@ import static com.hillavas.filmvazhe.MyApplication.getContext;
 //import com.android.billingclient.util.Inventory;
 //import com.android.billingclient.util.Purchase;
 
-public class VideoKartSignActivity extends BaseActivity implements View.OnClickListener {
+public class VideoKartSignActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
 
 
     @BindView(R.id.layout_sign_up)
@@ -67,7 +61,7 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
     @BindView(R.id.layout_verify)
     LinearLayout layoutVerify;
     @BindView(R.id.txt_code)
-    CodeInputView txtCode;
+    EditText txtCode;
     @BindView(R.id.lbl_timer)
     TimerView timerView;
     @BindView(R.id.btn_send_again)
@@ -80,6 +74,7 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
     LinearLayout layoutHeader;
 
     String code, phoneNumber = "";
+    private Integer transactionId;
 
 
     @Override
@@ -107,14 +102,7 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
         layoutHeader.getLayoutParams().height = (int) (width * (45.0f / 100.0f));
 
 
-        txtCode.addOnCompleteListener(new OnCodeCompleteListener() {
-            @Override
-            public void onCompleted(String code) {
-
-                verificationSubmit();
-
-            }
-        });
+        txtCode.addTextChangedListener(this);
 
         loginAnonymous();
 
@@ -147,21 +135,57 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                     MyApplication.saveLocalData(
                             "apiToken", data.get("device").getAsJsonObject().get("api_token").getAsString());
 
-                    if (data.get("user").isJsonNull()) {
-                        progressBar.setVisibility(View.GONE);
-                        layoutSign.setVisibility(View.VISIBLE);
+                    if (MyApplication.getSharedPreferences().getBoolean("vasRegister", false)) {
+
+                        String phoneNumber = MyApplication.getSharedPreferences().getString("phoneNumber", "");
+
+                        MyApplication.hamrahApi.getSubscribeState(phoneNumber, "8", new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                                JsonObject response = new JsonParser().parse(new String(responseBody)).getAsJsonObject();
+
+                                if (response.get("IsSuccessful").getAsBoolean() && response.get("Result").getAsBoolean()) {
+
+                                    startActivity(new Intent(VideoKartSignActivity.this, HomeActivity.class));
+                                    finish();
+
+                                } else {
+                                    layoutSign.setVisibility(View.VISIBLE);
+                                    progressBar.setVisibility(View.GONE);
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                                SnackbarManager.show(
+                                        Snackbar.with(getContext()) // context
+                                                .textTypeface(MyApplication.getTypeFace())
+                                                .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
+                                                .swipeToDismiss(false)
+                                                .actionLabel("تلاش مجدد")
+                                                .text("خطا در برقراری ارتباط") // text to display
+                                                .actionListener(new ActionClickListener() {
+                                                    @Override
+                                                    public void onActionClicked(Snackbar snackbar) {
+
+
+                                                        loginAnonymous();
+
+                                                    }
+                                                })
+                                        , VideoKartSignActivity.this); // activity where it is dis
+
+                            }
+                        });
+
+
                     } else {
-
-                        if (!data.get("user").getAsJsonObject().get("full_name").isJsonNull())
-                            MyApplication.saveLocalData("fullName", data.get("user").getAsJsonObject().get("full_name").getAsString());
-
-                        if (data.get("user").getAsJsonObject().get("is_premium").getAsBoolean()) {
-                            startActivity(new Intent(VideoKartSignActivity.this, HomeActivity.class));
-                            finish();
-                        } else {
-                            progressBar.setVisibility(View.GONE);
-                            layoutSign.setVisibility(View.VISIBLE);
-                        }
+                        layoutSign.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
                     }
 
 
@@ -169,8 +193,9 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                     SnackbarManager.show(
                             Snackbar.with(getContext()) // context
                                     .textTypeface(MyApplication.getTypeFace())
-                                    .duration(Snackbar.SnackbarDuration.LENGTH_SHORT)
-                                    .swipeToDismiss(true)
+                                    .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
+                                    .swipeToDismiss(false)
+                                    .actionLabel("تلاش مجدد")
                                     .text(status.get("message").getAsString()) // text to display
                                     .actionListener(new ActionClickListener() {
                                         @Override
@@ -195,7 +220,7 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                 SnackbarManager.show(
                         Snackbar.with(getContext()) // context
                                 .textTypeface(MyApplication.getTypeFace())
-                                .duration(Snackbar.SnackbarDuration.LENGTH_LONG)
+                                .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
                                 .swipeToDismiss(false)
                                 .actionLabel("تلاش مجدد")
                                 .text("خطا در برقراری ارتباط") // text to display
@@ -218,48 +243,60 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
     void vasRegister() {
 
         phoneNumber = String.valueOf(txtPhone.getText());
-        code = String.valueOf(new Random().nextInt(9000 - 1000) + 1000);
+//        code = String.valueOf(new Random().nextInt(9000 - 1000) + 1000);
         //Log.v("code", String.valueOf(code));
         if (Validator.isMobileNumber(phoneNumber)) {
 
-            layoutSign.setVisibility(View.GONE);
+            layoutSign.setClickable(false);
             //progressBar.setVisibility(View.VISIBLE);
 
 
-
-            MyApplication.apiVideokart.sendVerificationSMS(phoneNumber, new AsyncHttpResponseHandler() {
+            MyApplication.hamrahApi.subscribeRequest(phoneNumber, "8", "App-Hilla", new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                     progressBar.setVisibility(View.GONE);
 
-                    JsonObject result = new JsonParser().parse(new String(responseBody)).getAsJsonObject();
-                    JsonObject status = result.getAsJsonObject("status");
+                    JsonObject response = new JsonParser().parse(new String(responseBody)).getAsJsonObject();
 
-                    if (status.get("code").getAsInt() == 200) {
+                    if (response.get("IsSuccessful").getAsBoolean()) {
+
+                        transactionId = response.get("Result").getAsInt();
+
                         MyApplication.saveLocalData("phoneNumber", phoneNumber);
 
-                        layoutVerify.setVisibility(View.VISIBLE);
+
+                        if (transactionId == -1) {
+
+                            MyApplication.saveLocalData("vasRegister", true);
+
+                            startActivity(new Intent(VideoKartSignActivity.this, HomeActivity.class));
+                            finish();
+
+                        } else {
+
+                            layoutSign.setVisibility(View.GONE);
+                            layoutVerify.setVisibility(View.VISIBLE);
 
 
 
-                        timerView.setTime(120000);
-                        timerView.setOnTimerListener(new TimerView.TimerListener() {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
+                            timerView.setTime(120000);
+                            timerView.setOnTimerListener(new TimerView.TimerListener() {
+                                @Override
+                                public void onTick(long millisUntilFinished) {
 
-                            }
+                                }
 
-                            @Override
-                            public void onFinish() {
+                                @Override
+                                public void onFinish() {
 
-                                layoutSign.setVisibility(View.VISIBLE);
-                                layoutVerify.setVisibility(View.GONE);
+                                    layoutSign.setVisibility(View.VISIBLE);
+                                    layoutVerify.setVisibility(View.GONE);
 
-                            }
-                        });
-                        timerView.startCountDown();
-
+                                }
+                            });
+                            timerView.startCountDown();
+                        }
                     } else {
 
                         SnackbarManager.show(
@@ -267,10 +304,11 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                                         .textTypeface(MyApplication.getTypeFace())
                                         .duration(Snackbar.SnackbarDuration.LENGTH_SHORT)
                                         .swipeToDismiss(true)
-                                        .text("خطا در تائید شماره همراه") // text to display
+                                        .text(response.get("Message").getAsString()) // text to display
 
                                 , VideoKartSignActivity.this); // activity where it is dis
 
+                        layoutSign.setClickable(true);
                         layoutSign.setVisibility(View.VISIBLE);
                         layoutVerify.setVisibility(View.GONE);
 
@@ -284,6 +322,8 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                         error) {
 
                     layoutSign.setVisibility(View.VISIBLE);
+                    layoutSign.setClickable(true);
+
 
                     SnackbarManager.show(
                             Snackbar.with(getContext()) // context
@@ -299,7 +339,6 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                 @Override
                 public void onFinish() {
                     super.onFinish();
-                    progressBar.setVisibility(View.GONE);
 
                 }
             });
@@ -327,13 +366,13 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
 
                 timerView.stopCountDown();
 
+                layoutSign.setClickable(true);
                 layoutSign.setVisibility(View.VISIBLE);
                 layoutVerify.setVisibility(View.GONE);
                 progressBar.setVisibility(View.GONE);
 
                 break;
             case R.id.btn_sign_up:
-
 
                 vasRegister();
 
@@ -350,24 +389,20 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
 
     void verificationSubmit() {
 
-
-        MyApplication.saveLocalData("vasRegister", true);
-        startActivity(new Intent(VideoKartSignActivity.this, HomeActivity.class));
-        finish();
-
         progressBar.setVisibility(View.VISIBLE);
+        layoutVerify.setClickable(false);
+
         // layoutVerify.setVisibility(View.GONE);
+        String pin = String.valueOf(txtCode.getText());
 
-
-        MyApplication.apiVideokart.checkVerification(phoneNumber, txtCode.getCode(), new AsyncHttpResponseHandler() {
+        MyApplication.hamrahApi.subscribeConfirm("8", transactionId, pin, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
 
-                JsonObject result = new JsonParser().parse(new String(responseBody)).getAsJsonObject();
-                JsonObject status = result.getAsJsonObject("status");
+                JsonObject response = new JsonParser().parse(new String(responseBody)).getAsJsonObject();
 
-                if (status.get("code").getAsInt() == 200) {
+                if (response.get("IsSuccessful").getAsBoolean()) {
 
                     MyApplication.saveLocalData("vasRegister", true);
 
@@ -377,13 +412,11 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                     //Toast.makeText(SignActivity.this, "done", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    txtCode.setEditable(true);
-
                     //Show error
-                    txtCode.setError("کد فعال سازی معتبر نیست.");
+                    ToastHandler.onShow(VideoKartSignActivity.this,"کد فعال سازی معتبر نیست.",Toast.LENGTH_SHORT);
 
                     progressBar.setVisibility(View.GONE);
-                    layoutVerify.setVisibility(View.VISIBLE);
+                    layoutVerify.setClickable(true);
                 }
 
 
@@ -401,7 +434,7 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
 
                         , VideoKartSignActivity.this); // activity where it is displayed
                 progressBar.setVisibility(View.GONE);
-                layoutVerify.setVisibility(View.VISIBLE);
+                layoutVerify.setClickable(true);
 
             }
 
@@ -443,4 +476,21 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
     }
 
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (charSequence.length() == 4) {
+            verificationSubmit();
+
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
 }

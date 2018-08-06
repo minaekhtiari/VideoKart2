@@ -28,7 +28,7 @@ public class GuideActivity extends AhoyOnboarderActivity {
             if (getPackageName().equals("com.hillavas.videokart")) {
                 startActivity(new Intent(GuideActivity.this, VideoKartSignActivity.class));
 
-            }else{
+            } else {
                 startActivity(new Intent(GuideActivity.this, FilmVazehSignActivity.class));
 
             }
@@ -42,8 +42,8 @@ public class GuideActivity extends AhoyOnboarderActivity {
         AhoyOnboarderCard ahoyOnboarderCard1 = new AhoyOnboarderCard("", "هم فیلم ببین هم لغت یاد بگیر", R.drawable.g1);
         AhoyOnboarderCard ahoyOnboarderCard2 = new AhoyOnboarderCard("", "یک سکانس یک لغت ... یادگیری انگلیسی به همین راحتی", R.drawable.g2);
         AhoyOnboarderCard ahoyOnboarderCard3 = new AhoyOnboarderCard("", "زیرنویس سکانس هارو ببین،لغات جدید رو بهتر یاد بگیر و از دوستات جلو بزن", R.drawable.g3);
-        AhoyOnboarderCard ahoyOnboarderCard4 = new AhoyOnboarderCard("", String.format("تلفظ درست لغات رو با %s تمرین کن و یاد بگیر",getString(R.string.app_name)), R.drawable.g4);
-        AhoyOnboarderCard ahoyOnboarderCard5 = new AhoyOnboarderCard("", String.format("با %s،دیگه دیدن فیلم ها با زبان اصلی برات یک آرزو نیست",getString(R.string.app_name)), R.drawable.g5);
+        AhoyOnboarderCard ahoyOnboarderCard4 = new AhoyOnboarderCard("", String.format("تلفظ درست لغات رو با %s تمرین کن و یاد بگیر", getString(R.string.app_name)), R.drawable.g4);
+        AhoyOnboarderCard ahoyOnboarderCard5 = new AhoyOnboarderCard("", String.format("با %s،دیگه دیدن فیلم ها با زبان اصلی برات یک آرزو نیست", getString(R.string.app_name)), R.drawable.g5);
 
 
         ahoyOnboarderCard1.setBackgroundColor(R.color.black_transparent);
@@ -84,12 +84,18 @@ public class GuideActivity extends AhoyOnboarderActivity {
 
     @Override
     public void onFinishButtonPressed() {
-        startActivity(new Intent(GuideActivity.this, FilmVazehSignActivity.class));
+
+        Class cls = FilmVazehSignActivity.class;
+
+        if (getPackageName().equals("com.hillavas.videokart")) {
+            cls = VideoKartSignActivity.class;
+        }
+
+        startActivity(new Intent(GuideActivity.this, cls));
         MyApplication.saveLocalData("guide", true);
 
         finish();
     }
-
 
 
     @Override
