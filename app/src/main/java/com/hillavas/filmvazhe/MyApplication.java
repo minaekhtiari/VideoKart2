@@ -28,7 +28,6 @@ public class MyApplication extends Application {
     public static HamrahApi hamrahApi;
 
 
-
     private static SharedPreferences sharedPreferences;
     private static Context _context;
 

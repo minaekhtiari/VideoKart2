@@ -247,15 +247,13 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
         //Log.v("code", String.valueOf(code));
         if (Validator.isMobileNumber(phoneNumber)) {
 
-            layoutSign.setClickable(false);
-            //progressBar.setVisibility(View.VISIBLE);
-
+            progressBar.setVisibility(View.VISIBLE);
+            btnSignUp.setVisibility(View.INVISIBLE);
 
             MyApplication.hamrahApi.subscribeRequest(phoneNumber, "8", "App-Hilla", new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                    progressBar.setVisibility(View.GONE);
 
                     JsonObject response = new JsonParser().parse(new String(responseBody)).getAsJsonObject();
 
@@ -279,7 +277,6 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                             layoutVerify.setVisibility(View.VISIBLE);
 
 
-
                             timerView.setTime(120000);
                             timerView.setOnTimerListener(new TimerView.TimerListener() {
                                 @Override
@@ -291,6 +288,8 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                                 public void onFinish() {
 
                                     layoutSign.setVisibility(View.VISIBLE);
+                                    btnSignUp.setVisibility(View.VISIBLE);
+
                                     layoutVerify.setVisibility(View.GONE);
 
                                 }
@@ -308,10 +307,9 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
 
                                 , VideoKartSignActivity.this); // activity where it is dis
 
-                        layoutSign.setClickable(true);
+                        btnSignUp.setVisibility(View.VISIBLE);
                         layoutSign.setVisibility(View.VISIBLE);
                         layoutVerify.setVisibility(View.GONE);
-
 
                     }
 
@@ -321,8 +319,8 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                         error) {
 
+                    btnSignUp.setVisibility(View.VISIBLE);
                     layoutSign.setVisibility(View.VISIBLE);
-                    layoutSign.setClickable(true);
 
 
                     SnackbarManager.show(
@@ -339,6 +337,10 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                 @Override
                 public void onFinish() {
                     super.onFinish();
+                    btnSignUp.setEnabled(true);
+                    progressBar.setVisibility(View.GONE);
+
+
 
                 }
             });
@@ -366,7 +368,7 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
 
                 timerView.stopCountDown();
 
-                layoutSign.setClickable(true);
+                btnSignUp.setVisibility(View.VISIBLE);
                 layoutSign.setVisibility(View.VISIBLE);
                 layoutVerify.setVisibility(View.GONE);
                 progressBar.setVisibility(View.GONE);
@@ -413,7 +415,7 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
                 } else {
 
                     //Show error
-                    ToastHandler.onShow(VideoKartSignActivity.this,"کد فعال سازی معتبر نیست.",Toast.LENGTH_SHORT);
+                    ToastHandler.onShow(VideoKartSignActivity.this, "کد فعال سازی معتبر نیست.", Toast.LENGTH_SHORT);
 
                     progressBar.setVisibility(View.GONE);
                     layoutVerify.setClickable(true);
