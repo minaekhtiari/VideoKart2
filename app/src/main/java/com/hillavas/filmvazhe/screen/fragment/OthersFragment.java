@@ -17,10 +17,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.billingclient.util.IabHelper;
-import com.android.billingclient.util.IabResult;
-import com.android.billingclient.util.Inventory;
-import com.android.billingclient.util.Purchase;
+
 import com.hillavas.filmvazhe.screen.FeedbackActivity;
 import com.hillavas.filmvazhe.screen.FilmVazehSignActivity;
 import com.hillavas.filmvazhe.screen.UnsubscribeActivity;
@@ -36,7 +33,7 @@ import butterknife.BindView;
 public class OthersFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "Charkhone";
-    private IabHelper mHelper;
+    //private IabHelper mHelper;
 
     public OthersFragment() {
         // Required empty public constructor

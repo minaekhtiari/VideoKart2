@@ -1,10 +1,13 @@
 buildscript {
     dependencies {
         classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.11.0, 0.99.99]'
+
     }
 
     repositories {
         maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://plugins.gradle.org/m2/'}
 
     }
 
@@ -12,6 +15,8 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
 
 configurations {
     all*.exclude group: 'com.android.support', module: 'support-v13'
@@ -51,6 +56,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+
     productFlavors {
         irancell {
             resValue("string", "app_name", "فیلم واژه")
@@ -69,7 +77,7 @@ android {
         }
         hamrahAval {
             resValue("string", "app_name", "ویدیوکارت")
-            applicationId 'com.hillavas.videokart'
+            applicationId 'com.hillavas.videokart.akh100'
             minSdkVersion 16
             targetSdkVersion 27
             versionCode 1
@@ -77,8 +85,12 @@ android {
             signingConfig signingConfigs.release
 
             manifestPlaceholders = [
-                    appIcon: "@mipmap/ic_launcher_videokart"
+                    appIcon: "@mipmap/ic_launcher_videokart",
+                    onesignal_app_id: '9d28fa5a-4d23-406d-950e-2e00887ab85c',
+                    // Project number pulled from dashboard, local value is ignored.
+                    onesignal_google_project_number: '38117559926'
             ]
+           multiDexEnabled true
 
             //dimension "app2"
         }
@@ -120,11 +132,20 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.4.4'
     implementation 'com.github.mancj:MaterialSearchBar:0.7'
     implementation 'com.thebluealliance:spectrum:0.7.1'
-    implementation 'com.codemybrainsout.onboarding:onboarder:1.0.3'
+    implementation 'com.codemybrainsout.onboarding:onboarder:1.0.4'
     implementation 'com.github.dimorinny:show-case-card-view:0.0.1'
     implementation 'com.karumi:dexter:4.1.0'
-    implementation ':inAppPurchase@aar'
-    implementation ':inAppSDK@aar'
+
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+
+    implementation 'com.onesignal:OneSignal:3.10.1'
+
+    implementation 'co.ronash.android:pushe-base:1.4.0'
+    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+
+   // implementation 'com.android.support:multidex:1.0.3'
+
 }
-//trueapply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
 

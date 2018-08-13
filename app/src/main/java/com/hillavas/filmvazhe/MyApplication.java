@@ -9,12 +9,13 @@ import com.crashlytics.android.Crashlytics;
 import com.hillavas.filmvazhe.api.HamrahApi;
 import com.hillavas.filmvazhe.api.IrancellApi;
 import com.hillavas.filmvazhe.api.VideoCardApi;
+import com.onesignal.OneSignal;
 
 
 //import net.jhoobin.jhub.CharkhoneSdkApp;
 
-import net.jhoobin.jhub.CharkhoneSdkApp;
 
+import co.ronash.pushe.Pushe;
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -45,6 +46,13 @@ public class MyApplication extends Application {
 //                .dark(true);
 //        Colorful.init(this);
 
+        Pushe.initialize(this,true);
+
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
         final Fabric fabric = new Fabric.Builder(this)
                 .kits(new Crashlytics())
                 .build();
@@ -58,7 +66,7 @@ public class MyApplication extends Application {
         hamrahApi=new HamrahApi();
 
 
-        CharkhoneSdkApp.initSdk(this, getSecrets(), false);
+        //CharkhoneSdkApp.initSdk(this, getSecrets(), false);
 
     }
 

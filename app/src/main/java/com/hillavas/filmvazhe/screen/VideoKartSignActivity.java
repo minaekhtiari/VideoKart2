@@ -250,7 +250,7 @@ public class VideoKartSignActivity extends BaseActivity implements View.OnClickL
             progressBar.setVisibility(View.VISIBLE);
             btnSignUp.setVisibility(View.INVISIBLE);
 
-            MyApplication.hamrahApi.subscribeRequest(phoneNumber, "8", "App-Hilla", new AsyncHttpResponseHandler() {
+            MyApplication.hamrahApi.subscribeRequest(phoneNumber, "8", "A-Akh100", new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

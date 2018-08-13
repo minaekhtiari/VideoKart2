@@ -25,7 +25,7 @@ public class GuideActivity extends AhoyOnboarderActivity {
 
         if (MyApplication.getSharedPreferences().getBoolean("guide", false)) {
 
-            if (getPackageName().equals("com.hillavas.videokart")) {
+            if (getPackageName().contains("com.hillavas.videokart")) {
                 startActivity(new Intent(GuideActivity.this, VideoKartSignActivity.class));
 
             } else {
@@ -87,7 +87,7 @@ public class GuideActivity extends AhoyOnboarderActivity {
 
         Class cls = FilmVazehSignActivity.class;
 
-        if (getPackageName().equals("com.hillavas.videokart")) {
+        if (getPackageName().contains("com.hillavas.videokart")) {
             cls = VideoKartSignActivity.class;
         }
 

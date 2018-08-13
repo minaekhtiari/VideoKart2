@@ -1,27 +1,28 @@
 {
   "project_info": {
-    "project_number": "281930525189",
-    "firebase_url": "https://videocard-f1284.firebaseio.com",
-    "project_id": "videocard-f1284",
-    "storage_bucket": "videocard-f1284.appspot.com"
+    "project_number": "38117559926",
+    "firebase_url": "https://apps-campaign.firebaseio.com",
+    "project_id": "apps-campaign",
+    "storage_bucket": "apps-campaign.appspot.com"
   },
   "client": [
+
     {
       "client_info": {
-        "mobilesdk_app_id": "1:281930525189:android:8462082d4f5945fb",
+        "mobilesdk_app_id": "1:38117559926:android:c74a71d68e8da1f5",
         "android_client_info": {
-          "package_name": "com.hillavas.filmvazhe"
+          "package_name": "com.hillavas.videokart.akh100"
         }
       },
       "oauth_client": [
         {
-          "client_id": "281930525189-q9gb7s968o62vf58s0ri6ib5k2na8spu.apps.googleusercontent.com",
+          "client_id": "38117559926-kv7bioigcjpd8bor0l5495ec2sm2gl7j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCpJU3kcyrYAPfneUVJUuhiOT6W7EQyDyQ"
+          "current_key": "AIzaSyChezeL0190uUOdH8XK8fPgtRnZmaA-Ol8"
         }
       ],
       "services": {
