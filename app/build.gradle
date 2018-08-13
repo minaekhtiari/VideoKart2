@@ -48,6 +48,7 @@ android {
 
     dexOptions {
         preDexLibraries = false
+
     }
 
     buildTypes {
@@ -94,6 +95,10 @@ android {
 
             //dimension "app2"
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false // Add this
+        abortOnError false
     }
 }
 
